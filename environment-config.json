@@ -1,0 +1,10 @@
+{
+    "botUserAgent" : {
+      "default": "'facebookexternalhit|Twitterbot|LinkedInBot|Slack|Googlebot|WhatsApp|Pinterest'"
+    },
+    "externalApi" : {
+      "default": "'defaultExternalApiEndpoint'",
+      "dev": "'defaultExternalApiEndpointForDev'",
+      "prod": "'defaultExternalApiEndpointForProd'"
+    }
+}
