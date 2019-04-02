@@ -19,7 +19,7 @@ It allows returning static html for social sites (including Facebook, WhatsApp, 
 - AWS Lambda can only be deployed to (N. Virginia) Region.
 - Only Node.js runtime supported at the time when this is written.
 - Timeout of the lambda can be configured to 5 seconds.
-
+- Configure the Lambda@Function association's event type as `Viewer Request`
 
 # Reference
 - https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
