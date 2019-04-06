@@ -4,8 +4,7 @@ const del = require('del');
 const zip = require('gulp-zip');
 const replace = require('gulp-replace');
 const argv = require('yargs').argv
-
-
+const install = require("gulp-install");
 
 // Clean the dist folder
 gulp.task('clean', () => {
@@ -34,16 +33,31 @@ gulp.task('move', () => {
   return gulp.src([
     '**',
     '!dist/**',
+    '!node_modules/**',
     '!index.js',
     '!.gitignore',
     '!gulpfile.js',
-    '!environment-config.json',
     '!package.json',
     '!package-lock.json',
+    '!environment-config.json',
     '!README.md'
   ])
     .pipe(gulp.dest("dist/"))
 })
+
+// Install for production
+gulp.task('install-for-prod', () => {
+  return gulp.src(['./package.json','./package-lock.json'])
+  .pipe(gulp.dest('./dist/'))
+  .pipe(install({production: true}))
+});
+
+// Clean package.json
+gulp.task('clean-package-json', () => {
+  return del([
+    './dist/package*'
+    ]);
+});
 
 // Now the dist directory is ready to go. Zip it.
 gulp.task('zip', () => {
@@ -56,14 +70,24 @@ gulp.task('zip', () => {
 });
 
 
-// Gulp task
+// Gulp task for local dev.
 gulp.task('default', gulp.series([
   'clean',
   'update-env-var',
   'move',
+  'install-for-prod',
+  'clean-package-json',
   'zip'
   ])
 )
 
-
+// Gulp task for aws codebuild task.
+gulp.task('aws-codebuild', gulp.series([
+  'clean',
+  'update-env-var',
+  'move',
+  'install-for-prod',
+  'clean-package-json',
+  ])
+)
 

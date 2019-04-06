@@ -19,6 +19,7 @@
     "del": "^4.0.0",
     "fs": "0.0.1-security",
     "gulp": "^4.0.0",
+    "gulp-install": "^1.1.0",
     "gulp-replace": "^1.0.0",
     "gulp-zip": "^4.2.0",
     "yargs": "^13.2.2"
